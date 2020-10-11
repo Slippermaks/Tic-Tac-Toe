@@ -196,7 +196,7 @@ public class Game {
         // Инициализация игрока 1
         System.out.print("Игрок 1, введите ваше имя: ");
         String p1Name = in.readLine();
-        System.out.println("Символ - то, чем будете рисовать на поле.");
+        System.out.println("Символ - то, чем будете рисовать на поле. (пока что только цифру)");
         System.out.print(p1Name + ", введите свой символ: ");
         int p1Symbol = Integer.parseInt(in.readLine());
         player1.InitializePlayer(p1Name, p1Symbol);
