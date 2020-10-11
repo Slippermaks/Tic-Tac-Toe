@@ -33,7 +33,7 @@ public class Player {
     public void setPlayerName(String playerName) { this.playerName = playerName; }
 
     // Ход игрока.
-    public void Turn() throws IOException {
+    public void turn() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите ячейку поля корректно");
         System.out.print("строка: ");
@@ -43,7 +43,7 @@ public class Player {
     }
 
     // Инициализация игрока.
-    public void InitializePlayer(String playerName, int symbol) {
+    public void initializePlayer(String playerName, int symbol) {
         setPlayerName(playerName);
         setSymbol(symbol);
     }

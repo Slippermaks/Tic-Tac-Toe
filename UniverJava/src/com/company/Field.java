@@ -7,6 +7,9 @@ public class Field {
     // Размерность игрового поля.
     public int size;
 
+    // Чем заполнены ячейки
+    public int[][] fieldArray;
+
     public int getSize() { return size; }
 
     public void setSize(int size) { this.size = size; }
@@ -15,14 +18,11 @@ public class Field {
 
     public void setFieldArray(int[][] fieldArray) { this.fieldArray = fieldArray; }
 
-    // Чем заполнены ячейки
-    public int[][] fieldArray;
-
     public Field() {
     }
 
     // Инициализация игрового поля. (нули это пустые клетки).
-    public void InitializeField(int size) {
+    public void initializeField(int size) {
         setSize(size);
         setFieldArray(new int [size][size]);
         for (int i = 0; i < getSize(); i++) {
@@ -31,11 +31,11 @@ public class Field {
             }
         }
         System.out.println("Поле " + getSize() + "x" + getSize() + " инициализировано.");
-        ShowField();
+        showField();
     }
 
     // Вывести поле на экран.
-    public void ShowField() {
+    public void showField() {
         for (int k = 0; k < getSize() * 2 - 1; k++)
             System.out.print("=");
         System.out.println();

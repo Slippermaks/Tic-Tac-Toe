@@ -44,7 +44,7 @@ public class Game {
     }
 
     // Проверка на выигрыш
-    public boolean CheckWin(int symbolInCell) {
+    public boolean checkWin(int symbolInCell) {
         // Проверка подряд идущих знаков по вертикали и горизонтали
         boolean isWinning = false;
 
@@ -143,12 +143,12 @@ public class Game {
             setTurnNumber(getTurnNumber()+1);
             System.out.println("Ход игрока " + getPlayer1().getPlayerName());
             do {
-                getPlayer1().Turn();
+                getPlayer1().turn();
             } while (!isCellAvailable(getPlayer1().getX(), getPlayer1().getY()));
             getField().getFieldArray()[getPlayer1().getX()][getPlayer1().getY()] = getPlayer1().getSymbol();
-            ShowTurnNumber();
-            getField().ShowField();
-            if (CheckWin(getPlayer1().getSymbol())) {
+            showTurnNumber();
+            getField().showField();
+            if (checkWin(getPlayer1().getSymbol())) {
                 System.out.println(getPlayer1().getPlayerName() + " ВЫИГРАЛ!!!");
                 break;
             }
@@ -161,11 +161,11 @@ public class Game {
             setTurnNumber(getTurnNumber()+1);
             System.out.println("Ход игрока " + getPlayer2().getPlayerName());
             do {
-                getPlayer2().Turn();
+                getPlayer2().turn();
             } while (!isCellAvailable(getPlayer2().getX(), getPlayer2().getY()));
             getField().getFieldArray()[getPlayer2().getX()][getPlayer2().getY()] = getPlayer2().getSymbol();
-            getField().ShowField();
-            if (CheckWin(getPlayer2().getSymbol())) {
+            getField().showField();
+            if (checkWin(getPlayer2().getSymbol())) {
                 System.out.println(getPlayer2().getPlayerName() + " ВЫИГРАЛ!!!");
                 break;
             }
@@ -174,10 +174,17 @@ public class Game {
                 break;
             }
         }
+        System.out.println("Сыграть заново? (+ ДА / - НЕТ)");
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        if (in.readLine().equals("+")) {
+            System.out.println("НОВАЯ ИГРА");
+            initializeGame(field, player1, player2);
+            startGame();
+        }
     }
 
     // Показать, какой сейчас по счёту ход.
-    private void ShowTurnNumber() {
+    private void showTurnNumber() {
         for (int k = 0; k < getField().getSize() * 2 - 1; k++){
             System.out.print("_");
         }
@@ -186,11 +193,11 @@ public class Game {
     }
 
     // Инициализация игры.
-    public void InitializeGame(Field field, Player player1, Player player2) throws IOException {
+    public void initializeGame(Field field, Player player1, Player player2) throws IOException {
         // Инициализация игрового поля.
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Введите размерность игрового поля: ");
-        field.InitializeField(Integer.parseInt(in.readLine()));
+        field.initializeField(Integer.parseInt(in.readLine()));
         setField(field);
 
         // Инициализация игрока 1
@@ -199,7 +206,7 @@ public class Game {
         System.out.println("Символ - то, чем будете рисовать на поле. (пока что только цифру)");
         System.out.print(p1Name + ", введите свой символ: ");
         int p1Symbol = Integer.parseInt(in.readLine());
-        player1.InitializePlayer(p1Name, p1Symbol);
+        player1.initializePlayer(p1Name, p1Symbol);
         setPlayer1(player1);
 
         // Инициализация игрока 2
@@ -208,7 +215,7 @@ public class Game {
         System.out.println("Символ - то, чем будете рисовать на поле.");
         System.out.print(p2Name + ", введите свой символ: ");
         int p2Symbol = Integer.parseInt(in.readLine());
-        player2.InitializePlayer(p2Name, p2Symbol);
+        player2.initializePlayer(p2Name, p2Symbol);
         setPlayer2(player2);
     }
 
